@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-label="Hero clinic image placeholder">
+  <rect width="1600" height="1000" fill="#dfeeff"/>
+  <rect x="140" y="220" width="1320" height="620" rx="24" fill="#f5f9ff" stroke="#b8ceff" stroke-width="6"/>
+  <text x="50%" y="48%" text-anchor="middle" fill="#2c4f85" font-family="Segoe UI, Arial, sans-serif" font-size="60">Sanjeevni Clinic Hero Image</text>
+  <text x="50%" y="57%" text-anchor="middle" fill="#4b5d73" font-family="Segoe UI, Arial, sans-serif" font-size="34">Replace with your authorized clinic photo</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-label="Doctor profile placeholder">
+  <rect width="900" height="900" fill="#edf4ff"/>
+  <circle cx="450" cy="360" r="150" fill="#c9dbfb"/>
+  <rect x="260" y="560" width="380" height="180" rx="90" fill="#c9dbfb"/>
+  <text x="50%" y="86%" text-anchor="middle" fill="#4b5d73" font-family="Segoe UI, Arial, sans-serif" font-size="34">Doctor Profile Placeholder</text>
+</svg>

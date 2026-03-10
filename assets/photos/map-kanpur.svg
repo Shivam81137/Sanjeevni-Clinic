@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="Map placeholder for Kanpur">
+  <rect width="1400" height="900" fill="#e8f0ff"/>
+  <path d="M80 220h1240M80 380h1240M80 540h1240M80 700h1240" stroke="#c3d5f3" stroke-width="8"/>
+  <path d="M260 80v740M520 80v740M780 80v740M1040 80v740" stroke="#c3d5f3" stroke-width="8"/>
+  <circle cx="730" cy="430" r="52" fill="#1d4ed8"/>
+  <circle cx="730" cy="430" r="20" fill="#ffffff"/>
+  <text x="50%" y="88%" text-anchor="middle" fill="#4b5d73" font-family="Segoe UI, Arial, sans-serif" font-size="36">Map Placeholder - Kesapur Nagar, Nawabganj, Kanpur</text>
+</svg>
