@@ -309,6 +309,10 @@
 
   .mbb-btn       { font-size: .68rem; }
   .mbb-icon      { font-size: 1.2rem; }
+
+  /* Map embed – shorter on small phones */
+  .map-embed-wrap { height: 260px; }
+  .map-footer { flex-direction: column; align-items: flex-start; gap: .5rem; }
 }
 
 /* ────────────────────────────────────────────
