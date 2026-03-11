@@ -1,4 +1,4 @@
-﻿﻿document.addEventListener("DOMContentLoaded", function () {
+﻿document.addEventListener("DOMContentLoaded", function () {
   /* ── Year ── */
   var yr = document.getElementById("year");
   if (yr) yr.textContent = new Date().getFullYear();
@@ -63,6 +63,9 @@
     n.style.setProperty("--reveal-delay", d + "ms");
   });
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(pointer: fine)").matches;
+  var allowMicroMotion = !prefersReduced && finePointer;
+
   if (prefersReduced || !("IntersectionObserver" in window)) {
     revealNodes.forEach(function (n) { n.classList.add("in-view"); });
   } else {
@@ -119,6 +122,53 @@
   }
   initSlideshow("heroSlideshow",  5000);
   initSlideshow("aboutSlideshow", 6000);
+  /* Preload lazy images before they enter viewport for smoother scrolling */
+  function initImagePrefetch() {
+    var lazyImgs = Array.from(document.querySelectorAll('img[loading="lazy"]'));
+    if (!lazyImgs.length) return;
+
+    var preloadCache = new Set();
+    function warmImage(img) {
+      if (!img || img.dataset.prefetchReady === "1") return;
+      img.dataset.prefetchReady = "1";
+      img.decoding = "async";
+      img.loading = "eager";
+      if ("fetchPriority" in img) img.fetchPriority = "high";
+
+      var src = img.currentSrc || img.src;
+      if (!src || preloadCache.has(src)) return;
+      preloadCache.add(src);
+      var link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = src;
+      document.head.appendChild(link);
+    }
+
+    // Promote slideshow and gallery images first.
+    Array.from(document.querySelectorAll(".hero-slideshow img, .about-slideshow img, .photo-card img")).forEach(warmImage);
+
+    if (!("IntersectionObserver" in window)) {
+      lazyImgs.forEach(warmImage);
+      return;
+    }
+
+    var imgObserver = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        warmImage(entry.target);
+        obs.unobserve(entry.target);
+      });
+    }, {
+      // Fetch roughly 1 viewport before image appears.
+      rootMargin: "900px 0px",
+      threshold: 0.01
+    });
+
+    lazyImgs.forEach(function (img) { imgObserver.observe(img); });
+  }
+  initImagePrefetch();
+
   /* ── Counter animation ── */
   var counters = Array.from(document.querySelectorAll(".stat-num[data-count]"));
   if (!counters.length) return;
@@ -144,19 +194,23 @@
   counters.forEach(function (c) { cObs.observe(c); });
 
   /* ── Button ripple wave effect ── */
-  document.querySelectorAll(".btn:not(.btn-ghost)").forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      var wave = document.createElement("span");
-      wave.classList.add("btn-wave");
-      btn.appendChild(wave);
-      wave.addEventListener("animationend", function () { wave.remove(); });
+  if (allowMicroMotion) {
+    document.querySelectorAll(".btn:not(.btn-ghost)").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var wave = document.createElement("span");
+        wave.classList.add("btn-wave");
+        btn.appendChild(wave);
+        wave.addEventListener("animationend", function () { wave.remove(); });
+      });
     });
-  });
+  }
 
   /* ── Floating particle dots in hero header ── */
   (function spawnParticles() {
     var header = document.querySelector(".site-header");
     if (!header) return;
+    if (window.innerWidth <= 900 || !allowMicroMotion) return;
+
     function createParticle() {
       var p = document.createElement("span");
       p.style.cssText = [
@@ -175,8 +229,7 @@
       header.appendChild(p);
       p.addEventListener("animationend", function () { p.remove(); });
     }
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setInterval(createParticle, 900);
-    }
+
+    setInterval(createParticle, 900);
   })();
 });

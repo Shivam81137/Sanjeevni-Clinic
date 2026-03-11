@@ -8,6 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="images/Screenshot (1231).png" fetchpriority="high" />
+  <link rel="preload" as="image" href="images/Screenshot (1234).png" />
+  <link rel="preload" as="image" href="images/Screenshot (1235).png" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="mobile.css" />
 </head>
@@ -132,13 +135,13 @@
         <div class="illus-ring illus-ring-2"></div>
         <div class="hero-slideshow" id="heroSlideshow">
           <div class="slide active">
-            <img src="images/Screenshot (1231).png" alt="Sanjeevani Clinic entrance" loading="eager" />
+            <img src="images/Screenshot (1231).png" alt="Sanjeevani Clinic entrance" loading="eager" decoding="async" fetchpriority="high" />
           </div>
           <div class="slide">
-            <img src="images/Screenshot (1234).png" alt="Sanjeevani Clinic view" loading="lazy" />
+            <img src="images/Screenshot (1234).png" alt="Sanjeevani Clinic view" loading="eager" decoding="async" fetchpriority="high" />
           </div>
           <div class="slide">
-            <img src="images/Screenshot (1235).png" alt="Sanjeevani Clinic full view" loading="lazy" />
+            <img src="images/Screenshot (1235).png" alt="Sanjeevani Clinic full view" loading="eager" decoding="async" fetchpriority="high" />
           </div>
           <button class="slide-btn slide-prev" aria-label="Previous">&#8249;</button>
           <button class="slide-btn slide-next" aria-label="Next">&#8250;</button>
